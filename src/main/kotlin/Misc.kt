@@ -102,6 +102,8 @@ class Misc {
 
         val heightOfTree = height(binaryTree.root)
         println("The height of the binary tree is $heightOfTree")
+        // O(N) time because will visit every node in depth first manner
+        // O(N) space because recursion call stack will take some space
     }
 
     fun height(node: BinaryTree.TreeNode?): Int {
