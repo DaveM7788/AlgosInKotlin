@@ -4,12 +4,14 @@ fun main() {
     println("Hello World!")
     val tester = intArrayOf(1, -2, 3, 9, 5, 4)
 
-    println(findShortestSubArray(intArrayOf(1, 2, 2, 3, 1)))
+    //println(findShortestSubArray(intArrayOf(1, 2, 2, 3, 1)))
 
     val misc = Misc()
     val entry = intArrayOf(1, 2, 3, -1, -2, 6, 7, 8)
     val ans = misc.subArrayKElementsLeastSum(entry, 2)
-    println("subarray is ${ans.joinToString()}")
+    //println("subarray is ${ans.joinToString()}")
+
+    misc.setUpBinaryTreeAndPrintHeight()
 }
 
 
@@ -104,3 +106,8 @@ fun twoSum(nums: IntArray, target: Int): IntArray {
     }
     return intArrayOf()
 }
+
+// Leet Code 1347 Changes to make two strings Anagrams
+
+
+// Leet Code 829 Consecutive Numbers Sum

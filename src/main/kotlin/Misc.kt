@@ -76,4 +76,44 @@ class Misc {
         }
         return arr.slice(runningMinStartIdx..runningMinEndIdx).toIntArray()
     }
+
+    // find the height or max depth of a Binary Tree
+    // the height is the max number of nodes from the lowest leaf node to the root node
+    // solve the problem using recursion. It's also possible to use a Queue to solve the problem iteratively
+    // we add find the max depth of the left subtree and right subtree and then add 1 to account for the current node
+    // we recurse until we find null
+    class BinaryTree {
+        var root: TreeNode? = null
+        class TreeNode(a: Int?) {
+            var left: TreeNode? = null
+            var right: TreeNode? = null
+            var data: Int? = a
+        }
+    }
+
+    fun setUpBinaryTreeAndPrintHeight() {
+        var binaryTree = BinaryTree()
+
+        binaryTree.root = BinaryTree.TreeNode(1)
+        binaryTree.root?.left = BinaryTree.TreeNode(2)
+        binaryTree.root?.right = BinaryTree.TreeNode(3)
+        binaryTree.root?.left?.left = BinaryTree.TreeNode(4)
+        binaryTree.root?.left?.right = BinaryTree.TreeNode(5)
+
+        val heightOfTree = height(binaryTree.root)
+        println("The height of the binary tree is $heightOfTree")
+    }
+
+    fun height(node: BinaryTree.TreeNode?): Int {
+        if (node == null) return 0
+
+        val leftDepth = height(node.left)
+        val rightDepth = height(node.right)
+
+        return if (leftDepth > rightDepth) {
+            leftDepth + 1
+        } else {
+            rightDepth + 1
+        }
+    }
 }
