@@ -118,4 +118,43 @@ class Misc {
             rightDepth + 1
         }
     }
+
+    fun basicLoopStyles() {
+        for (i in 0 ..10) {
+            if (i % 2 == 0) {
+                print("$i ")
+            }
+        }
+        println()
+
+        for (i in 0 until 10) {
+            if (i % 2 == 0) {
+                print("$i ")
+            }
+        }
+        println()
+
+        for (i in 10 downTo 0 step 2) {
+            print("$i ")
+        }
+
+        val basicArr = arrayOf(0, 1, 2, 3, 7, -9)
+        val zeroesArr: Array<Int> = Array(5) { 0 }
+
+        println()
+        zeroesArr.forEach {
+            print("$it ")
+        }
+
+        println()
+        basicArr.forEachIndexed { index, value ->
+            print("$value at index $index, ")
+        }
+
+        println()
+        val squaresArr: Array<Int> = Array(20) { it * it }
+        squaresArr.forEach {
+            print("$it ")
+        }
+    }
 }

@@ -14,6 +14,8 @@ fun main() {
     //println("subarray is ${ans.joinToString()}")
 
     misc.setUpBinaryTreeAndPrintHeight()
+
+    misc.basicLoopStyles()
 }
 
 
