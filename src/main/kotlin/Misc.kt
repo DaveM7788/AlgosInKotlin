@@ -156,5 +156,58 @@ class Misc {
         squaresArr.forEach {
             print("$it ")
         }
+
+        println()
+        val v = BlubDataClass(5, 6)
+        println(v.sum())
+    }
+
+    data class BlubDataClass(val a: Int, val b: Int) {
+
+        // can't use abstract or sealed or inner. data class is simple class
+        // data class may implement interface
+        fun sum(): Int {
+            return a + b
+        }
+    }
+
+    // constructor keyword is redundant and could be removed
+    class BlubHeaderCtor constructor(var a: Int) {
+        var blub: Int
+
+        // init is if you wanted constructor to additional set up or run set up code
+        init {
+            val random = 7.toString()
+            blub = a
+        }
+    }
+
+    open class SampleSecondaryCtors {
+        constructor(a: Int, b: Int) {
+            println("The first parameter value is : $a")
+            println("The second parameter value is : $b")
+        }
+
+        constructor(a: Int) {
+            println("The first parameter value is : $a")
+        }
+
+        // need final keyword for classes to be inherited and functions to override
+        open fun doNothing() {
+        }
+    }
+
+    class InheritSecondary(): SampleSecondaryCtors(5) {
+        override fun doNothing() {
+
+        }
+    }
+
+    fun variousListTypes() {
+        val immutableList: List<Int> = listOf(1, 2, 3, 4)
+        // immutableList[1] = 5    ERROR
+        val mutableList = mutableListOf(1, 2, 3, 4)
+        mutableList[1] = 5
+        mutableList.add(6)
     }
 }
