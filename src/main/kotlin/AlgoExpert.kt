@@ -162,4 +162,30 @@ class AlgoExpert {
         }
         return linkedList
     }
+
+    // First Non Repeating Char in a String
+    fun firstNonRepeatingCharacter(string: String): Int {
+        // first non repeating Character
+        // will at least be O(N) because we'll need to check all characters
+        // just hash map. see which one has 1 occurence and lowest index
+
+        val charBank = mutableMapOf<Char, Pair<Int, Int>>() // char, occurences, idx of first
+        string.forEachIndexed { idx, char ->
+            if (charBank.containsKey(char)) {
+                var pair = charBank[char]!!
+                pair = Pair(pair.first + 1, pair.second)
+                charBank[char] = pair
+            } else {
+                charBank[char] = Pair(1, idx)
+            }
+        }
+
+        charBank.forEach {
+            if (it.value.first == 1) {
+                return it.value.second
+            }
+        }
+
+        return -1
+    }
 }
