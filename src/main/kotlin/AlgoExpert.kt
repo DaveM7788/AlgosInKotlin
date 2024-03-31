@@ -108,4 +108,58 @@ class AlgoExpert {
         }
         return waitTime
     }
+
+    open class BinaryTree(value: Int) {
+        var value = value
+        var left: BinaryTree? = null
+        var right: BinaryTree? = null
+    }
+
+    // Evaluate Expression Tree
+    // given a tree. if node is -1 means add operator. -2 means minus operator, etc.
+    // leaf nodes are all >= 0. Evaluate the expression tree (ie perform the calculations in the tree)
+    fun evaluateExpressionTree(tree: BinaryTree): Int {
+        // base case. positive number or a leaf node of the tree
+        if (tree.value >= 0) return tree.value
+
+        // recurse through tree. leftValue is result of left subtree. same for right
+        val leftValue = evaluateExpressionTree(tree.left!!)
+        val rightValue = evaluateExpressionTree(tree.right!!)
+
+        // if we have operator (-tree.value) then add, minus, divide subtrees accordingly
+        return when (tree.value) {
+            -1 -> { leftValue + rightValue }
+            -2 -> { leftValue - rightValue }
+            -3 -> { leftValue / rightValue }
+            else -> { leftValue * rightValue }
+        }
+    }
+
+
+    open class LinkedList(value: Int) {
+        var value = value
+        var next: LinkedList? = null
+    }
+
+    // Remove Duplicates from Linked List
+    // Given a SORTED Linked List. remove any duplicates
+    fun removeDuplicatesFromLinkedList(linkedList: LinkedList): LinkedList {
+        var iterNode: LinkedList? = linkedList
+
+        // iterate through Linked List.
+        // since LL is sorted we know repeat nodes will all be next to each other
+        while (iterNode != null) {
+            // at each iter, find the next distinct value node
+            var nextDistinct = iterNode.next
+            while (nextDistinct != null && nextDistinct.value == iterNode.value) {
+                nextDistinct = nextDistinct.next
+            }
+
+            // after finding distinct node. point iteration node to the actual next distinct one
+            iterNode.next = nextDistinct
+            // move next loop iteration to the new next node (nextDistinct)
+            iterNode = nextDistinct
+        }
+        return linkedList
+    }
 }
