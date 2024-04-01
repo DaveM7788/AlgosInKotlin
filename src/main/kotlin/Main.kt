@@ -18,6 +18,8 @@ fun main() {
     misc.basicLoopStyles()
 
     misc.reverseStrInPlace("abcdef")
+
+    println(misc.fibonacci(10))
 }
 
 
