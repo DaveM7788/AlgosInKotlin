@@ -210,4 +210,27 @@ class Misc {
         mutableList[1] = 5
         mutableList.add(6)
     }
+
+
+    interface CoolInterface {
+        fun doStuff() { }
+    }
+
+    interface AnotherInterface : CoolInterface {
+
+    }
+
+    fun reverseStrInPlace(input: String) {
+        val inputArr = input.toCharArray()
+        var startIdx = 0
+        var endIdx = input.length - 1
+        while (endIdx > startIdx) {
+            val startChar = inputArr[startIdx]
+            inputArr[startIdx] = inputArr[endIdx]
+            inputArr[endIdx] = startChar
+            startIdx++
+            endIdx--
+        }
+        println(inputArr)
+    }
 }

@@ -16,6 +16,8 @@ fun main() {
     misc.setUpBinaryTreeAndPrintHeight()
 
     misc.basicLoopStyles()
+
+    misc.reverseStrInPlace("abcdef")
 }
 
 
