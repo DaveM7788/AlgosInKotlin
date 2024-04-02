@@ -188,4 +188,69 @@ class AlgoExpert {
 
         return -1
     }
+
+    // Stable Internships
+    // list of interns. each intern has a list of their team preference ranked from low to high
+    // list of teams. each has a list of their intern preference
+    // There are N interns and N teams. Assign 1 intern to each in a stable way. Stable means there is no unmatched
+    // pair of an intern and team such that both the intern and team would prefer they match
+    // if they are multiple matches, every intern should be matched with the best team possible for them
+    fun stableInternships(interns: List<List<Int>>, teams: List<List<Int>>): List<List<Int>> {
+        // we cant just give all interns their first choice. need bias towards interns though
+        // we try to give each intern their first choice. find conflicts. then give team choice they want out of the
+        // conflicting interns
+
+        // create a stack of free interns. map chosen interns. also need current intern choices
+        val chosenInterns = mutableMapOf<Int, Int>()  // key = team, value = intern
+        val freeInterns = MutableList(interns.size) { it } // 0, 1, 2, 3, 4, etc.
+        // what choice is intern on. Are they choosing their first or second choice
+        val currentInternChoices = MutableList(interns.size) { 0 }
+
+        // create maps for teams. key = intern. value = rank of intern for team's preferences
+        val teamMaps = mutableListOf<MutableMap<Int, Int>>()
+        teams.forEach {
+            val rank = mutableMapOf<Int, Int>()  // need one entry for each intern
+            for (i in 0 until it.size) {
+                val internNum = it[i]  // remember that intern ranks are in order
+                rank[internNum] = i
+            }
+            teamMaps.add(rank)
+        }
+
+        while (freeInterns.size > 0) {
+            val internNum = freeInterns.removeAt(freeInterns.size - 1)
+
+            val intern = interns[internNum]
+            val teamPref = intern[currentInternChoices[internNum]]  // try to give them 0th, 1st, 2nd choice
+            currentInternChoices[internNum] += 1
+
+            // if team does not have an intern. give this intern their 1st choice
+            if (teamPref !in chosenInterns) {
+                chosenInterns[teamPref] = internNum
+                continue
+            }
+
+            // what if 2 interns want same team?. check their ranks
+            val prevIntern = chosenInterns[teamPref]!!  // who is already on the team
+            val prevInternRank = teamMaps[teamPref][prevIntern]!!
+            val currentInternRank = teamMaps[teamPref][internNum]!!
+
+            if (currentInternRank < prevInternRank) {
+                // this iter's intern if preferred by the team. so replace chosenIntern for team
+                freeInterns.add(prevIntern)
+                chosenInterns[teamPref] = internNum
+            } else {
+                // team prefers intern they already have
+                freeInterns.add(internNum)
+            }
+        }
+
+        val matches = mutableListOf<List<Int>>() // list of matches. intern to teamNum
+        chosenInterns.forEach { teamNum, interNum ->
+            matches.add(listOf(interNum, teamNum))
+        }
+
+        // O(N^2) Space and Time
+        return matches
+    }
 }
